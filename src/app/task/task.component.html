@@ -1,0 +1,45 @@
+<div>
+    <div class="list-group container center-block mb-2 w-50">
+        <h1 class="d-flex justify-content-center">Tasks list</h1>
+        <div class="list-group-item list-group-item-action flex-column align-items-start ">
+            <div class="d-flex w-100 justify-content-between">
+                <input type="text" class="form-control mr-3" placeholder="Enter task" [(ngModel)]="addTaskTitle" #input (blur)="input.value=''">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button class="btn btn-secondary" (click)="addTask()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-group  container center-block mb-2 w-50" *ngFor="let task of tasks">
+        <a class="list-group-item  flex-column align-items-start ">
+            <div class="d-flex w-100 justify-content-between mb-2">
+                <h5 class="mb-1 align-self-center ">{{task.title}}</h5>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" (click)="delTask(task)"><div class="material-icons align-bottom" >delete_forever</div></button>
+                    <button type="button" class="btn btn-secondary" (click)="editBtn(task)"><i class="material-icons align-bottom" >edit</i></button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between border noEdit" [class.edit]="task !== editTask">
+                <div class="m-3">
+                    <h6 class="mb-3">Owner: {{task.owner.email}}</h6>
+                    <h6 *ngIf="task.co_owner != ''">Co-owners:</h6>
+                    <div *ngFor="let co_owner of task.co_owner" class="d-flex align-items-start flex-column">
+                        <div>{{co_owner.email}}</div>
+                    </div>
+                </div>
+                <div class="m-3">
+                    <label>Edit task</label>
+                    <div class="d-flex w-100 justify-content-between mb-3">
+                        <input type="text" class="form-control mr-1" #edit value={{task.title}}>
+                        <button type="button" class="btn btn-secondary" (click)="editTaskFn(task, edit.value)"><i class="material-icons align-bottom" >save</i></button>
+                    </div>
+                    <label>Share task</label>
+                    <div class="d-flex w-100 justify-content-between">
+                        <input type="text" class="form-control mr-1" placeholder="Enter email" #coOwner (blur)="input.value=''">
+                        <button type="button" class="btn btn-secondary" (click)="addCoOwner(task, coOwner.value)"><i class="material-icons align-bottom">share</i></button>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

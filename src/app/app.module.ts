@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    NgbModule
+    NgbModule,
+    NgxJsonLdModule
   ],
   providers: [],
   bootstrap: [AppComponent]

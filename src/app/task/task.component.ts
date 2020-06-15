@@ -36,6 +36,11 @@ export class TaskComponent implements OnInit {
   constructor(private router: Router,
     private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document) {
+    const head = document.getElementsByTagName('head')[0];
+    const js = document.createElement('script');
+    js.type = 'application/ld+json';
+    js.appendChild(document.createTextNode(JSON.stringify(this.schema)));
+    head.appendChild(js);
     this.state.logOut = true;
     this.socket = io.connect('');
 
@@ -101,11 +106,7 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    const head = document.getElementsByTagName('head')[0];
-    const js = document.createElement('script');
-    js.type = 'application/ld+json';
-    js.appendChild(document.createTextNode(JSON.stringify(this.schema)));
-    head.appendChild(js);
+
   }
 
 }

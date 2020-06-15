@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
 import { IsLoggetIn, State } from '../data';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
+
 
 import * as io from 'socket.io-client';
 import { webSocket } from 'rxjs/webSocket';
@@ -31,7 +33,9 @@ export class TaskComponent implements OnInit {
   editTask;
   shareInput: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private _renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document: Document) {
     this.state.logOut = true;
     this.socket = io.connect('');
 
@@ -97,7 +101,16 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    let script = this._renderer2.createElement('script');
+    script.type = `application/ld+json`;
+    script.text = `
+        {
+            "@context": "https://schema.org"
+            /* your schema.org microdata goes here */
+        }
+    `;
 
+    this._renderer2.appendChild(this._document.head, script);
   }
 
 }

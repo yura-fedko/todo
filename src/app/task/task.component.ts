@@ -101,16 +101,11 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    let script = this._renderer2.createElement('script');
-    script.type = `application/ld+json`;
-    script.text = `
-        {
-            "@context": "https://schema.org"
-            /* your schema.org microdata goes here */
-        }
-    `;
-
-    this._renderer2.appendChild(this._document.head, script);
+    const head = document.getElementsByTagName('head')[0];
+    const js = document.createElement('script');
+    js.type = 'application/ld+json';
+    js.appendChild(document.createTextNode(JSON.stringify(this.schema)));
+    head.appendChild(js);
   }
 
 }

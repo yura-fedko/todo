@@ -20,7 +20,7 @@ import { webSocket } from 'rxjs/webSocket';
 export class TaskComponent implements OnInit {
   schema = {
     '@context': 'http://schema.org',
-    '@type': 'WebSite',
+    '@type': 'Organization',
     name: 'angular.io',
     url: 'https://angular.io'
   };

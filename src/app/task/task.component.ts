@@ -36,14 +36,6 @@ export class TaskComponent implements OnInit {
 
   constructor(private router: Router, private seo: SeoService
     ) {
-      this.seo.updateStructuredData(
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "url": "http://www.trilon.io",
-          "name": "Fullstack Consulting",
-        }
-      );
 
 
 

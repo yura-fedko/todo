@@ -42,13 +42,7 @@ export class TaskComponent implements OnInit {
           "@type": "Organization",
           "url": "http://www.trilon.io",
           "name": "Fullstack Consulting",
-          "contactPoint": {
-          "@type": "ContactPoint",
-          "website": "https://trilon.io",
-          "contactType": "Consulting"
         }
-      }
-
       );
 
 
@@ -57,7 +51,7 @@ export class TaskComponent implements OnInit {
       this.socket = io.connect('');
 
     this.socket.on('initialTask', (res) => {
-      console.log(res)
+    console.log(res)
       this.tasks = res.filter(filterByOwner);
 
       function filterByOwner(task) {

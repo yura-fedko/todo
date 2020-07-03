@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
-
+import { NgUniversalModule } from '@trilon/ng-universal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +24,8 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
     HttpClientModule,
     NgbModule,
     NgbModule,
-    NgxJsonLdModule
+    NgxJsonLdModule,
+    NgUniversalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

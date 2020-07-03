@@ -6,7 +6,8 @@ import { from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
-
+import { JsonLdService } from 'ngx-seo';
+import { SeoService } from '@trilon/ng-universal';
 
 import * as io from 'socket.io-client';
 import { webSocket } from 'rxjs/webSocket';
@@ -33,16 +34,27 @@ export class TaskComponent implements OnInit {
   editTask;
   shareInput: string;
 
-  constructor(private router: Router,
-    private _renderer2: Renderer2,
-    @Inject(DOCUMENT) private _document: Document) {
-    const head = document.getElementsByTagName('head')[0];
-    const js = document.createElement('script');
-    js.type = 'application/ld+json';
-    js.appendChild(document.createTextNode(JSON.stringify(this.schema)));
-    head.appendChild(js);
-    this.state.logOut = true;
-    this.socket = io.connect('');
+  constructor(private router: Router, private seo: SeoService
+    ) {
+      this.seo.updateStructuredData(
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "url": "http://www.trilon.io",
+          "name": "Fullstack Consulting",
+          "contactPoint": {
+          "@type": "ContactPoint",
+          "website": "https://trilon.io",
+          "contactType": "Consulting"
+        }
+      }
+
+      );
+
+
+
+      this.state.logOut = true;
+      this.socket = io.connect('');
 
     this.socket.on('initialTask', (res) => {
       console.log(res)
@@ -69,6 +81,7 @@ export class TaskComponent implements OnInit {
       }
 
     });
+
 
   }
 

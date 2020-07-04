@@ -34,37 +34,41 @@ export class TaskComponent implements OnInit {
   editTask;
   shareInput: string;
 
-  constructor(private router: Router, private seo: SeoService
-    ) {
-
-
-
-      this.state.logOut = true;
-      this.socket = io.connect('');
+  constructor(private router: Router, private seo: SeoService) {
+    this.seo.updateStructuredData(
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "http://www.trilon.io",
+        "name": "Fullstack Consulting",
+      }
+    );
+    this.state.logOut = true;
+    this.socket = io.connect('');
 
     this.socket.on('initialTask', (res) => {
     console.log(res)
-      this.tasks = res.filter(filterByOwner);
+    this.tasks = res.filter(filterByOwner);
 
-      function filterByOwner(task) {
-        if (task.owner._id === Cookie.get('id') || filterByCoOwner(task.co_owner)) {
-          return true;
-        } else {
-          return false;
-        }
+    function filterByOwner(task) {
+      if (task.owner._id === Cookie.get('id') || filterByCoOwner(task.co_owner)) {
+         return true;
+      } else {
+        return false;
       }
+    }
 
-      function filterByCoOwner(owners) {
-        if (owners.length !== 0) {
-          for (let i = 0; i <= owners.length; i++) {
-            if (owners[i]._id === Cookie.get('id')) {
-              return true;
-            } else {
-              return false;
-            }
+    function filterByCoOwner(owners) {
+      if (owners.length !== 0) {
+        for (let i = 0; i <= owners.length; i++) {
+          if (owners[i]._id === Cookie.get('id')) {
+            return true;
+          } else {
+            return false;
           }
         }
       }
+    }
 
     });
 

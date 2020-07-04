@@ -16,14 +16,7 @@ export class AppComponent {
   state = State;
   socket: any;
   constructor(private seo: SeoService) {
-    this.seo.updateStructuredData(
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "url": "http://www.trilon.io",
-        "name": "Fullstack Consulting",
-      }
-    );
+
   }
   logOut() {
     this.isLoggetIn.status = false;

@@ -35,14 +35,7 @@ export class TaskComponent implements OnInit {
   shareInput: string;
 
   constructor(private router: Router, private seo: SeoService) {
-    this.seo.updateStructuredData(
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "url": "http://www.trilon.io",
-        "name": "Fullstack Consulting",
-      }
-    );
+
     this.state.logOut = true;
     this.socket = io.connect('');
 
@@ -109,7 +102,14 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.seo.updateStructuredData(
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "http://www.trilon.io",
+        "name": "Fullstack Consulting",
+      }
+    );
   }
 
 }

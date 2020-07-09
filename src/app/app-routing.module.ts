@@ -7,7 +7,7 @@ import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
-  { path: 'task', component: TaskComponent, canActivate: [TaskGuard]},
+  { path: 'task', component: TaskComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
